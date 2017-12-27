@@ -5,7 +5,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Button,
 } from 'react-native';
 
 import HomeStyles from './styles'
@@ -17,7 +18,16 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-class HomeScreen extends Component<{}> {
+class HomeScreen extends Component < {} > {
+  static navigationOptions = ({navigation}) => ({
+    title: 'Home',
+    headerRight: <Button
+    title="Info"
+    onPress={()=>navigation.navigate('Stack1')} />,
+  });
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
       <View style={HomeStyles.container}>
@@ -35,4 +45,6 @@ class HomeScreen extends Component<{}> {
   }
 }
 
-export { HomeScreen }
+export {
+  HomeScreen
+}
