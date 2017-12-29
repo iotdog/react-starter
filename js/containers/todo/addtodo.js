@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 
-let AddTodo = ({ dispatch }) => {
+const addTodo = ({ dispatch }) => {
   let input
   return (
     <View style={{flexDirection: 'row'}}>
@@ -37,6 +37,6 @@ let AddTodo = ({ dispatch }) => {
     </View>
   );
 }
-const AddTodoContainer = connect()(AddTodo)
+const AddTodoContainer = connect()(addTodo)
 
 export default AddTodoContainer

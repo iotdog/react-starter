@@ -12,6 +12,16 @@ In this project, we are going to learning the topics as follows:
 
 this project is inspired by [native-starter-kit](https://github.com/start-react/native-starter-kit), but we add some extra features, such as protobuf and BLE (bluetooth low energy).
 
+## 1.1 Run the code
+
+```
+git clone https://github.com/iotdog/rn-starter.git
+cd rn-starter
+npm install
+react-native run-android # for Android
+react-native run-ios # for iOS
+```
+
 # 2. Start an Empty React Native Project
 
 Following the [official tutorial](https://facebook.github.io/react-native/docs/getting-started.html) to get start.
@@ -33,3 +43,7 @@ Related source code is as follows:
 * js/components/todo - define ui components
 * js/containers/todo - define containers
 * js/reducers/todo - define reducers
+
+## References
+
+[React-redux "connect" explained](https://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/)

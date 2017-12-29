@@ -1,42 +1,45 @@
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
   Platform
-} from 'react-native';
+} from 'react-native'
 import {
   StackNavigator,
   TabNavigator
-} from 'react-navigation';
+} from 'react-navigation'
 import {
   HomeScreen
-} from './js/components/home';
+} from './js/components/home'
 import {
   Stack1Screen,
   Stack2Screen
-} from './js/components/stacks';
+} from './js/components/stacks'
 import {
   Tab1Screen,
   Tab2Screen
-} from './js/components/tabs';
+} from './js/components/tabs'
 import {
   Provider
-} from 'react-redux';
+} from 'react-redux'
 import {
   createStore,
   applyMiddleware,
   combineReducers,
   compose
-} from 'redux';
+} from 'redux'
 import {
   createLogger
-} from 'redux-logger';
-import {
-  TodoReducers
-} from './js/reducers/todo';
+} from 'redux-logger'
 import {
   TodoScreen
-} from './js/components/todo';
+} from './js/components/todo'
+import {
+  UserScreen
+} from './js/components/user'
+import {
+  RootReducers
+} from './js/reducers'
 
 /**
  * home screens
@@ -54,6 +57,9 @@ const HomeRoutes = {
   TodoList: {
     screen: TodoScreen,
   },
+  UserScreen: {
+    screen: UserScreen,
+  }
 }
 
 const HomeNavigator = StackNavigator({
@@ -102,7 +108,7 @@ function configureStore(initialState) {
       loggerMiddleware
     ),
   );
-  return createStore(TodoReducers, initialState, enhancer);
+  return createStore(RootReducers, initialState, enhancer);
 }
 
 const store = configureStore({});
