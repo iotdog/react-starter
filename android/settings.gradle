@@ -1,3 +1,3 @@
-rootProject.name = 'react_starter'
+rootProject.name = 'rn_starter'
 
 include ':app'

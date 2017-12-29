@@ -19,6 +19,24 @@ import {
   Tab1Screen,
   Tab2Screen
 } from './js/components/tabs';
+import {
+  Provider
+} from 'react-redux';
+import {
+  createStore,
+  applyMiddleware,
+  combineReducers,
+  compose
+} from 'redux';
+import {
+  createLogger
+} from 'redux-logger';
+import {
+  TodoReducers
+} from './js/reducers/todo';
+import {
+  TodoScreen
+} from './js/components/todo';
 
 /**
  * home screens
@@ -32,6 +50,9 @@ const HomeRoutes = {
   },
   Stack2: {
     screen: Stack2Screen,
+  },
+  TodoList: {
+    screen: TodoScreen,
   },
 }
 
@@ -68,7 +89,28 @@ const RootNavigator = TabNavigator({
   },
 });
 
-export default () => <RootNavigator />
+/**
+ * configure redux
+ */
+const loggerMiddleware = createLogger({
+  predicate: (getState, action) => __DEV__
+});
+
+function configureStore(initialState) {
+  const enhancer = compose(
+    applyMiddleware(
+      loggerMiddleware
+    ),
+  );
+  return createStore(TodoReducers, initialState, enhancer);
+}
+
+const store = configureStore({});
+
+export default () =>
+  <Provider store={store}>
+    <RootNavigator />
+  </Provider>
 /**
  * the following code is for ReactBase Toast
  */

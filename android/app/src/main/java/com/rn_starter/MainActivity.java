@@ -1,4 +1,4 @@
-package com.react_starter;
+package com.rn_starter;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
      */
     @Override
     protected String getMainComponentName() {
-        return "react_starter";
+        return "rn_starter";
     }
 }

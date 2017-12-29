@@ -1,4 +1,4 @@
-package com.react_starter;
+package com.rn_starter;
 
 import android.app.Application;
 
