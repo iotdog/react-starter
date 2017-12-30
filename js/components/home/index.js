@@ -1,13 +1,18 @@
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
+  Platform
+} from 'react-native'
+import {
+  Container,
+  Content,
   Button,
-} from 'react-native';
+  Label,
+  H1,
+  Text,
+  Icon
+} from 'native-base'
 
 import HomeStyles from './styles'
 
@@ -21,27 +26,28 @@ const instructions = Platform.select({
 class HomeScreen extends Component < {} > {
   static navigationOptions = ({navigation}) => ({
     title: 'Home',
-    headerRight: <Button
-    title="Menu"
-    onPress={()=>navigation.navigate('Stack1')} />,
+    headerRight: (
+      <Button onPress={()=>navigation.navigate('Stack1')} small light style={{marginRight: 5}}>
+        <Label>Menu</Label>
+      </Button>
+    ),
+    tabBarIcon: <Icon name='home'/>
   });
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <View style={HomeStyles.container}>
-        <Text style={HomeStyles.welcome}>
-          Welcome to RN Starter!
-        </Text>
+      <Container style={HomeStyles.container}>
+        <H1>Welcome to RN Starter!</H1>
         <Text style={HomeStyles.instructions}>
           To get more, click Menu on the top right
         </Text>
         <Text style={HomeStyles.instructions}>
           {instructions}
         </Text>
-      </View>
-    );
+      </Container>
+    )
   }
 }
 

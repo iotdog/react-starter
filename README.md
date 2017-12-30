@@ -18,6 +18,7 @@ this project is inspired by [native-starter-kit](https://github.com/start-react/
 git clone https://github.com/iotdog/rn-starter.git
 cd rn-starter
 npm install
+react-native link
 react-native run-android # for Android
 react-native run-ios # for iOS
 ```
@@ -35,6 +36,14 @@ TODO
 Learn about the [core concepts](https://redux.js.org/docs/introduction/CoreConcepts.html) at first.
 In this project, we migrate the official redux example [Todo List](https://redux.js.org/docs/basics/ExampleTodoList.html) to React Native app.
 
+## 4.1 Setup
+
+```
+npm install --save redux react-redux redux-logger
+```
+
+## 4.2 Code
+
 Related source code is as follows:
 
 * App.js - setup redux store
@@ -44,6 +53,25 @@ Related source code is as follows:
 * js/containers/todo - define containers
 * js/reducers/todo - define reducers
 
-## References
+## 4.3 References
 
 [React-redux "connect" explained](https://www.sohamkamani.com/blog/2017/03/31/react-redux-connect-explained/)
+
+# 5. [NativeBase](https://nativebase.io/) Integration
+
+## 5.1 Setup base library
+
+```
+npm install --save native-base
+npm install --save react-native-vector-icons
+react-native link
+```
+
+## 5.2 Setup theme library
+
+```
+node node_modules/native-base/ejectTheme.js
+```
+then a folder named native-base-theme gets copied to your project root.
+
+the usages are in js/components/stacks/stack2.js

@@ -1,0 +1,12 @@
+const React = require('react-native');
+
+const { StyleSheet } = React;
+export default {
+  container: {
+    flex: 1,
+    justifyContent: 'flex-start',
+  },
+  button: {
+    margin: 10,
+  },
+};

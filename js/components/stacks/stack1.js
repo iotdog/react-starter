@@ -1,11 +1,13 @@
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
+  Container,
+  Content,
   Text,
-  View,
-  Button
-} from 'react-native';
+  Button,
+} from 'native-base'
+import Styles from './styles'
 
 class Stack1Screen extends Component < {} > {
   static navigationOptions = {
@@ -28,14 +30,19 @@ class Stack1Screen extends Component < {} > {
   }
   render() {
     return (
-      <View>
-        <Button title='Go to Stack2' onPress={this._goStack2}>
-        </Button>
-        <Button title='Go to TodoList' onPress={this._goTodoList}>
-        </Button>
-        <Button title='Go to User Screen' onPress={this._goUserScreen}>
-        </Button>
-      </View>
+      <Container style={Styles.container}>
+        <Content>
+          <Button bordered onPress={this._goStack2} style={Styles.button}>
+            <Text>Go to Stack2</Text>
+          </Button>
+          <Button block onPress={this._goTodoList} style={Styles.button}>
+            <Text>Go to TodoList</Text>
+          </Button>
+          <Button rounded warning onPress={this._goUserScreen} style={Styles.button}>
+            <Text>Go to User Screen</Text>
+          </Button>
+        </Content>
+      </Container>
     );
   }
 }
