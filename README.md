@@ -23,6 +23,11 @@ react-native run-android # for Android
 react-native run-ios # for iOS
 ```
 
+for Android, you need to specify SDK location in android/local.properties, by adding a line like:
+```
+sdk.dir=/Your/Path/To/Android/sdk
+```
+
 # 2. Start an Empty React Native Project
 
 Following the [official tutorial](https://facebook.github.io/react-native/docs/getting-started.html) to get start.
@@ -85,3 +90,56 @@ Related source code is as follows:
 * js/components/stacks/stack2.js
 * js/components/tabs/tab1.js
 * js/components/tabs/tab2.js
+
+# 6. [react-native-ble-plx](https://github.com/Polidea/react-native-ble-plx) Integration
+
+## 6.1 Setup
+
+**you must use real device to test Bluetooth.**
+
+1. install library
+for iOS, install [Carthage](https://github.com/Carthage/Carthage) first.
+```
+npm install --save react-native-ble-plx
+react-native link react-native-ble-plx
+```
+
+2. iOS config
+in Project -> Build Settings -> Search Paths -> Framework Search Paths, add:
+```
+$(SRCROOT)/../node_modules/react-native-ble-plx/ios/BleClientManager/Carthage/Build/iOS
+```
+in Project -> Build Settings -> Build Options -> Always Embed Swift Standard Libraries, set to YES, in my Xcode, the menu is named "Build Options (unnamed domain)".
+
+in Target -> Build Phases, click on top left button and add New Run Script Phase:
+for shell command, copy the code to the black input box, do not change Shell value which by default is /bin/sh.
+```
+/usr/local/bin/carthage copy-frameworks
+```
+for Input Files:
+```
+$(SRCROOT)/../node_modules/react-native-ble-plx/ios/BleClientManager/Carthage/Build/iOS/BleClientManager.framework
+$(SRCROOT)/../node_modules/react-native-ble-plx/ios/BleClientManager/Carthage/Build/iOS/RxSwift.framework
+$(SRCROOT)/../node_modules/react-native-ble-plx/ios/BleClientManager/Carthage/Build/iOS/RxBluetoothKit.framework
+```
+
+then compile the project. I encounter the tvOS signing error, just delete rn_starter-tvOS and rn_starter-tvOSTests targets as I will not use it.
+
+finally you need to trust the app in your phone.
+
+3. Android config
+
+in module's build.gradle, change minSdkVersion to 18.
+
+in In AndroidManifest.xml, add Bluetooth permissions:
+```
+<uses-permission android:name="android.permission.BLUETOOTH"/>
+<uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+<uses-permission-sdk-23 android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+```
+and also change android:minSdkVersion to 18.
+
+then add this line to module's proguard-rules.pro:
+```
+-dontwarn com.polidea.reactnativeble.**
+```
