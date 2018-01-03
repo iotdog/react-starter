@@ -1,10 +1,12 @@
 import React, {
   Component
-} from 'react';
+} from 'react'
 import {
-  View,
-  Text
-} from 'react-native';
+  Container,
+  Header,
+  Content,
+  H1
+} from 'native-base'
 
 class Tab2Screen extends Component<{}> {
   constructor(props) {
@@ -12,9 +14,11 @@ class Tab2Screen extends Component<{}> {
   }
   render() {
     return (
-      <View>
-        <Text>This is Tab2 Screen</Text>
-      </View>
+      <Container>
+        <Content>
+          <H1>This is Tab2Screen</H1>
+        </Content>
+      </Container>
     );
   }
 }
