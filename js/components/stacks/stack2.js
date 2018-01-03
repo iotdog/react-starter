@@ -2,6 +2,9 @@ import React, {
   Component
 } from 'react'
 import {
+  Image
+} from 'react-native'
+import {
   Container,
   Content,
   Header,
@@ -11,14 +14,18 @@ import {
   Text,
   Button,
   FooterTab,
-  StyleProvider
+  StyleProvider,
+  Icon
 } from 'native-base'
 import getTheme from '../../../native-base-theme/components'
 import material from '../../../native-base-theme/variables/material'
 
+const nativeBaseLogo = require("../../../assets/nativebase_logo.png"); // 引入自定义图片
+
 class Stack2Screen extends Component<{}> {
   static navigationOptions = {
     title: 'Stack2',
+    tabBarIcon: <Image source={nativeBaseLogo} style={{width: 24, height: 24}} />
   };
   constructor(props) {
     super(props);
@@ -29,21 +36,21 @@ class Stack2Screen extends Component<{}> {
         <Container>
           <Header>
             <Body>
-              <Title>NativeBase Overview</Title>
+              <Title>NativeBase Header</Title>
             </Body>
           </Header>
           <Content>
-            <Text>This is stack2</Text>
+            <Text>NativeBase Content</Text>
           </Content>
           <Footer>
             <FooterTab>
               <Button full>
-                <Text>Tab A</Text>
+                <Text>NativeBase FooterTab A</Text>
               </Button>
             </FooterTab>
             <FooterTab>
                 <Button full>
-                  <Text>Tab B</Text>
+                  <Text>NativeBase FooterTab B</Text>
                 </Button>
             </FooterTab>
           </Footer>
