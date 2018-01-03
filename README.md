@@ -75,3 +75,13 @@ node node_modules/native-base/ejectTheme.js
 then a folder named native-base-theme gets copied to your project root.
 
 the usages are in js/components/stacks/stack2.js
+
+## 5.3 Code
+
+Related source code is as follows:
+
+* js/components/home/index.js
+* js/components/stacks/stack1.js
+* js/components/stacks/stack2.js
+* js/components/tabs/tab1.js
+* js/components/tabs/tab2.js
