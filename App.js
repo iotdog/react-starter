@@ -74,6 +74,20 @@ const HomeNavigator = StackNavigator({
   mode: Platform.OS === 'ios' ? 'modal' : 'card',
 });
 
+const BleRoutes = {
+  Home: {
+    screen: Tab1Screen
+  }
+}
+
+const BleNavigator = StackNavigator({
+  ...BleRoutes
+}, {
+  initialRouteName: 'Home',
+  headerMode: 'screen',
+  mode: Platform.OS === 'ios' ? 'modal' : 'card',
+})
+
 /**
  * global navigation
  */
@@ -81,8 +95,8 @@ const RootNavigator = TabNavigator({
   TabHome: {
     screen: HomeNavigator,
   },
-  Tab1: {
-    screen: Tab1Screen,
+  TabBle: {
+    screen: BleNavigator,
   },
   Tab2: {
     screen: Tab2Screen,

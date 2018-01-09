@@ -1,12 +1,15 @@
 import {
   combineReducers
-} from 'redux';
+} from 'redux'
 import {
   TodoReducers
 } from './todo'
 import {
   UserReducers
 } from './user'
+import {
+  BleReducer
+} from './ble'
 
 /**
  * combine reduces is a good way for implementation
@@ -18,7 +21,8 @@ import {
 
 const RootReducers = combineReducers({
   todo: TodoReducers,
-  user: UserReducers
+  user: UserReducers,
+  ble: BleReducer
 })
 
 export { RootReducers }
