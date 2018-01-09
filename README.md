@@ -98,7 +98,8 @@ Related source code is as follows:
 **you must use real device to test Bluetooth.**
 
 1. install library
-for iOS, install [Carthage](https://github.com/Carthage/Carthage) first.
+
+for iOS, install [Carthage](https://github.com/Carthage/Carthage) first. then
 ```
 npm install --save react-native-ble-plx
 react-native link react-native-ble-plx
