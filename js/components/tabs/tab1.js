@@ -6,6 +6,8 @@ import {
   Header,
   Content,
   Title,
+  Button,
+  Text,
   Icon
 } from 'native-base'
 import {
@@ -16,12 +18,16 @@ import {
   BleOffAction
 } from '../../actions/ble'
 import { connect } from 'react-redux'
+import {
+  ScanBtnContainer
+} from '../../containers/ble'
 
 class tab1Screen extends Component<{}> {
   static navigationOptions = ({navigation}) => ({
     title: 'BLE',
     headerTitle: 'BleRx',
-    tabBarIcon: <Icon name='bluetooth'/>
+    tabBarIcon: <Icon name='bluetooth'/>,
+    headerRight: <ScanBtnContainer />
   });
   constructor(props) {
     super(props)

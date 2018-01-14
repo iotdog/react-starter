@@ -42,9 +42,9 @@ const deviceReducer = (devices = [], action) => {
        */
       devices.sort((a, b) => {
         if (a.rssi >= b.rssi) {
-          return 1
+          return -1
         }
-        return -1
+        return 1
       })
       return devices
     default:
