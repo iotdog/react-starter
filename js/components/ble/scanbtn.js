@@ -12,9 +12,9 @@ import {
   ConvertMac
 } from '../../utils'
 
-const scanBtnComponent = ({ dispatch, bleMgr,scanning }) => {
+const scanBtnComponent = ({ dispatch, bleMgr, scanning }) => {
   return (
-    <Button light onPress={ () => {
+    <Button transparent light onPress={ () => {
         if(bleMgr == null) {
           console.log('bleMgr is null')
           return
@@ -34,13 +34,16 @@ const scanBtnComponent = ({ dispatch, bleMgr,scanning }) => {
             let mac = device.name.substring(device.name.length - 12, device.name.length)
             mac = ConvertMac(mac)
             let name = device.name.substring(0, device.name.length - 12)
-            dispatch(BleScanUpdateAction(mac, name, device.rssi))
+            if(device.rssi >= -75) {
+              dispatch(BleScanUpdateAction(mac, name, device.rssi))
+            }
+            // dispatch(BleScanUpdateAction(mac, name, device.rssi))
           }
         })
         dispatch(BleScanStartAction())
       }
     }>
-      <Text>{scanning ? 'Stop' : 'Scan'}</Text>
+      <Text style={{color: 'black'}}>{scanning ? 'Stop' : 'Scan'}</Text>
     </Button>
   )
 }

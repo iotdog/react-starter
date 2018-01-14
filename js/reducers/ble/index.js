@@ -15,12 +15,12 @@ ble:
   scan: {
     scanning: false, # indicating ble scan is running
     devices: [
-    {
-    mac: 'FF:FF:FF:FF:FF:FF',
-    name: 'sLock-1',
-    rssi: -64,
-    }
-    ...
+      {
+        mac: 'FF:FF:FF:FF:FF:FF',
+        name: 'sLock-1',
+        rssi: -64,
+      }
+      ...
     ]
   }
 }

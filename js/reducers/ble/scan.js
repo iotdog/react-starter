@@ -34,7 +34,7 @@ const deviceReducer = (devices = [], action) => {
         devices.push({ // add new device
           mac: action.mac,
           name: action.name,
-          rssi: action.rssi,
+          rssi: action.rssi
         })
       }
       /**
@@ -46,7 +46,18 @@ const deviceReducer = (devices = [], action) => {
         }
         return 1
       })
-      return devices
+      /**
+       * must return new array object, see https://redux.js.org/docs/Troubleshooting.html
+       */
+      let tmp = []
+      for(let i=0; i<devices.length; i++) {
+        tmp.push({
+          mac: devices[i]['mac'],
+          name: devices[i]['name'],
+          rssi: devices[i]['rssi']
+        })
+      }
+      return tmp
     default:
       return devices
   }

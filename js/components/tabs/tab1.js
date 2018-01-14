@@ -19,7 +19,8 @@ import {
 } from '../../actions/ble'
 import { connect } from 'react-redux'
 import {
-  ScanBtnContainer
+  ScanBtnContainer,
+  ScanListContainer
 } from '../../containers/ble'
 
 class tab1Screen extends Component<{}> {
@@ -52,7 +53,7 @@ class tab1Screen extends Component<{}> {
     return (
       <Container>
         <Content>
-          <Title style={{marginTop: 30}}>This is Tab1Screen</Title>
+          <ScanListContainer />
         </Content>
       </Container>
     );
