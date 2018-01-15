@@ -35,7 +35,7 @@ const scanBtnComponent = ({ dispatch, bleMgr, scanning }) => {
             mac = ConvertMac(mac)
             let name = device.name.substring(0, device.name.length - 12)
             if(device.rssi >= -75) {
-              dispatch(BleScanUpdateAction(mac, name, device.rssi))
+              dispatch(BleScanUpdateAction(mac, name, device.rssi, device))
             }
             // dispatch(BleScanUpdateAction(mac, name, device.rssi))
           }

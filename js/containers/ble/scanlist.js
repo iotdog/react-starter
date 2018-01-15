@@ -3,9 +3,10 @@ import {
 } from 'react-redux'
 import scanListComponent from '../../components/ble/scanlist'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    devices: state.ble.scan.devices
+    devices: state.ble.scan.devices,
+    navigation: ownProps.navigation
   }
 }
 

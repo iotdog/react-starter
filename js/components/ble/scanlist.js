@@ -8,24 +8,14 @@ import {
   Right,
   Icon
 } from 'native-base'
+import ScanDevComponent from './scandev'
 
-const scanListComponent = ( {devices} ) => {
+const scanListComponent = ( {devices, navigation} ) => {
   return (
     <List dataArray={devices}
       renderRow={
         (device) => (
-          <ListItem icon style={{marginLeft: 0}}>
-            <Left>
-              <Icon style={{marginLeft: 15}} name='md-bluetooth' />
-            </Left>
-            <Body>
-              <Text>{device.mac}</Text>
-              <Text note>{device.name}</Text>
-            </Body>
-            <Right>
-              <Text note>{device.rssi}</Text>
-            </Right>
-          </ListItem>
+          <ScanDevComponent mac={device.mac} name={device.name} device={device.dev} navigation={navigation} />
         )
       }>
     </List>

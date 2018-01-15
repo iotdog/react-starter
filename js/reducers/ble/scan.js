@@ -21,11 +21,16 @@ const scanningReducer = (state = false, action) => {
 const deviceReducer = (devices = [], action) => {
   switch (action.type) {
     case ACTION_BLESCAN_UPDATE:
+      if(action.rssi >= 0) { // sometime rssi will get 127 for iOS, ignore them
+        return devices
+      }
       let existed = false
       for (let i = 0; i < devices.length; i++) {
         if (devices[i]['mac'] == action.mac) { // update existed device
           devices[i]['name'] = action.name
           devices[i]['rssi'] = action.rssi
+          devices[i]['dev'] = action.dev
+          devices[i]['updateTime'] = Math.floor(Date.now() / 1000)
           existed = true
           break
         }
@@ -34,7 +39,9 @@ const deviceReducer = (devices = [], action) => {
         devices.push({ // add new device
           mac: action.mac,
           name: action.name,
-          rssi: action.rssi
+          rssi: action.rssi,
+          dev: action.dev,
+          updateTime: Math.floor(Date.now() / 1000)
         })
       }
       /**
@@ -51,10 +58,16 @@ const deviceReducer = (devices = [], action) => {
        */
       let tmp = []
       for(let i=0; i<devices.length; i++) {
+        let curr_time = Math.floor(Date.now() / 1000)
+        if(curr_time - devices[i]['updateTime'] > 30) { // the device is missed
+          continue
+        }
         tmp.push({
           mac: devices[i]['mac'],
           name: devices[i]['name'],
-          rssi: devices[i]['rssi']
+          rssi: devices[i]['rssi'],
+          dev: devices[i]['dev'],
+          updateTime: devices[i]['updateTime']
         })
       }
       return tmp
