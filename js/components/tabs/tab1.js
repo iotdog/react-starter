@@ -53,7 +53,7 @@ class tab1Screen extends Component<{}> {
     return (
       <Container>
         <Content>
-          <ScanListContainer />
+          <ScanListContainer navigation={this.props.navigation} />
         </Content>
       </Container>
     );

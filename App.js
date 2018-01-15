@@ -40,6 +40,9 @@ import {
 import {
   RootReducers
 } from './js/reducers'
+import {
+  DevCtlScreen
+} from './js/components/ble'
 
 /**
  * home screens
@@ -77,6 +80,9 @@ const HomeNavigator = StackNavigator({
 const BleRoutes = {
   Home: {
     screen: Tab1Screen
+  },
+  DevCtl: {
+    screen: DevCtlScreen
   }
 }
 

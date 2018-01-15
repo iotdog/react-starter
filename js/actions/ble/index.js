@@ -29,12 +29,13 @@ const BleScanStopAction = () => {
   }
 }
 
-const BleScanUpdateAction = (mac, name, rssi) => {
+const BleScanUpdateAction = (mac, name, rssi, dev) => {
   return {
     type: ACTION_BLESCAN_UPDATE,
     mac,
     name,
     rssi,
+    dev
   }
 }
 
