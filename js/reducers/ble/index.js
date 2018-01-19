@@ -1,8 +1,9 @@
 import {
   combineReducers
 } from 'redux'
-import scanReducer from './scan.js'
-import hardwareReducer from './hardware.js'
+import scanReducer from './scan'
+import hardwareReducer from './hardware'
+import connReducer from './connection'
 
 /*
 State Shape：
@@ -29,17 +30,11 @@ ble:
     connState: 'disconnected', # can be one of [connecting, connected, disconnecting, disconnected]
     dev: object, # Device instance of react-native-ble-plx library
     mac: 'FF:FF:FF:FF:FF:FF',
+    subscription: object, # Subscription on which remove() function can be called to unsubscribe
     services: [
       {
-        uuid: '00001851-0000-1000-8000-00805f9b34fb',
         svc: object, # Service instance of react-native-ble-plx library
-        characteristics: [
-          {
-            uuid: '00002a3a-0000-1000-8000-00805f9b34fb',
-            char: object, # Characteristic object of react-native-ble-plx library
-          },
-          ...
-        ]
+        characteristics: [...] # Characteristic object of react-native-ble-plx library
       },
       ...
     ]
@@ -49,7 +44,8 @@ ble:
 
 const BleReducer = combineReducers({
   hardware: hardwareReducer,
-  scan: scanReducer
+  scan: scanReducer,
+  connection: connReducer
 })
 
 export { BleReducer }

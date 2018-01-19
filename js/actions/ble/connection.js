@@ -1,37 +1,108 @@
-const BLECONN_STATE_ESTABLISHING = 'connecting'
-const BLECONN_STATE_ESTABLISHED = 'connected'
-const BLECONN_STATE_RELEASING = 'releasing'
-const BLECONN_STATE_RELEASED = 'released'
+const BLECONN_STATE_CONNECTING = 'connecting'
+const BLECONN_STATE_CONNECTED = 'connected'
+const BLECONN_STATE_DISCONNECTING = 'disconnecting'
+const BLECONN_STATE_DISCONNECTED = 'disconnected'
 
-const ACTION_BLECONN_ESTABLISH = 'BLECONN_ESTABLISH'
 const ACTION_BLECONN_CONNECTING = 'BLECONN_CONNECTING'
+const ACTION_BLECONN_SVCDISCOVERED = 'BLECONN_SVCDISCOVERED'
 const ACTION_BLECONN_CONNECTED = 'BLECONN_CONNECTED'
-const ACTION_BLECONN_RELEASE = 'BLECONN_RELEASE'
 const ACTION_BLECONN_DISCONNECTING = 'BLECONN_DISCONNECTING'
 const ACTION_BLECONN_DISCONNECTED = 'BLECONN_DISCONNECTED'
 
-const BleConnectingAction = () => {
+const BleConnectingAction = (dev, mac, subscription) => {
   return {
-    type: ACTION_BLECONN_CONNECTING
+    type: ACTION_BLECONN_CONNECTING,
+    dev,
+    mac,
+    subscription
   }
 }
 
-const BleConnEstablishingAction = (dev, connState) => {
-  if(connState == BLECONN_RELEASED) {
-    return function(dispatch) {
-      dispatch(BleConnectingAction())
-      // TODO 
-      return dev.connect().then()
-    }
+const BleConnectedAction = () => {
+  return {
+    type: ACTION_BLECONN_CONNECTED
   }
-  else {
-    console.log('ble connection is not released')
+}
+
+const BleSvcDiscoveredAction = (svc, chars) => {
+  return {
+    type: ACTION_BLECONN_SVCDISCOVERED,
+    svc,
+    chars
+  }
+}
+
+const BleDisconnectingAction = () => {
+  return {
+    type: ACTION_BLECONN_DISCONNECTING
+  }
+}
+
+const BleDisconnectedAction = () => {
+  return {
+    type: ACTION_BLECONN_DISCONNECTED
+  }
+}
+
+const BleConnEstablishAction = (dev, mac) => {
+  return function(dispatch) {
+    // subscribe onDisconnected event
+    let onDisconnectedSubscription = dev.onDisconnected(
+      (error, device) => {
+        console.log(error)
+        dispatch(BleDisconnectedAction())
+      }
+    )
+    dispatch(BleConnectingAction(dev, mac, onDisconnectedSubscription))
+    dev.connect().then(
+      (device) => {
+        dispatch(BleConnectedAction())
+        return device.discoverAllServicesAndCharacteristics()
+      }
+    ).then(
+      (device) => {
+        return device.services()
+      }
+    ).then(
+      (services) => {
+        for (let i = 0; i < services.length; i++) {
+          let svc = services[i];
+          svc.characteristics().then(
+            (chars) => {
+              dispatch(BleSvcDiscoveredAction(svc, chars))
+            }
+          )
+        }
+      }
+    )
+  }
+}
+
+const BleConnReleaseAction = (dev) => {
+  return function(dispatch) {
+    dispatch(BleDisconnectingAction())
+    dev.cancelConnection().then(
+      (device) => {
+        dispatch(BleDisconnectedAction())
+      }
+    ).catch(
+      (error) => {
+        console.log('disconnecting error:' + error)
+      }
+    )
   }
 }
 
 export {
-  ACTION_BLECONN_ESTABLISHING,
-  ACTION_BLECONN_ESTABLISHED,
-  ACTION_BLECONN_RELEASING,
-  ACTION_BLECONN_RELEASED
+  BLECONN_STATE_CONNECTING,
+  BLECONN_STATE_CONNECTED,
+  BLECONN_STATE_DISCONNECTING,
+  BLECONN_STATE_DISCONNECTED,
+  ACTION_BLECONN_CONNECTING,
+  ACTION_BLECONN_CONNECTED,
+  ACTION_BLECONN_SVCDISCOVERED,
+  ACTION_BLECONN_DISCONNECTING,
+  ACTION_BLECONN_DISCONNECTED,
+  BleConnEstablishAction,
+  BleConnReleaseAction
 }
