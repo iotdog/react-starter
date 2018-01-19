@@ -6,6 +6,7 @@ import {
 import {
   BleScanStartAction,
   BleScanStopAction,
+  BleScanCacheAction,
   BleScanUpdateAction
 } from '../../actions/ble'
 import {
@@ -34,10 +35,12 @@ const scanBtnComponent = ({ dispatch, bleMgr, scanning }) => {
             let mac = device.name.substring(device.name.length - 12, device.name.length)
             mac = ConvertMac(mac)
             let name = device.name.substring(0, device.name.length - 12)
-            if(device.rssi >= -75) {
-              dispatch(BleScanUpdateAction(mac, name, device.rssi, device))
-            }
-            // dispatch(BleScanUpdateAction(mac, name, device.rssi))
+            // if(device.rssi > -60) {
+            //   dispatch(BleScanCacheAction(mac, name, device.rssi, device))
+            //   dispatch(BleScanUpdateAction())
+            // }
+            dispatch(BleScanCacheAction(mac, name, device.rssi, device))
+            dispatch(BleScanUpdateAction())
           }
         })
         dispatch(BleScanStartAction())

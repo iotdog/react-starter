@@ -5,7 +5,7 @@ import scanListComponent from '../../components/ble/scanlist'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    devices: state.ble.scan.devices,
+    devices: state.ble.scan.display.devices,
     navigation: ownProps.navigation
   }
 }

@@ -3,6 +3,7 @@ const ACTION_BLE_OFF = 'BLE_OFF'
 const ACTION_BLESCAN_START = 'BLESCAN_START'
 const ACTION_BLESCAN_STOP = 'BLESCAN_STOP'
 const ACTION_BLESCAN_UPDATE = 'BLESCAN_UPDATE'
+const ACTION_BLESCAN_CACHE = 'BLESCAN_CACHE'
 
 const BleOnAction = (bleMgr) => {
   return {
@@ -29,9 +30,15 @@ const BleScanStopAction = () => {
   }
 }
 
-const BleScanUpdateAction = (mac, name, rssi, dev) => {
+const BleScanUpdateAction = () => {
   return {
-    type: ACTION_BLESCAN_UPDATE,
+    type: ACTION_BLESCAN_UPDATE
+  }
+}
+
+const BleScanCacheAction = (mac, name, rssi, dev) => {
+  return {
+    type: ACTION_BLESCAN_CACHE,
     mac,
     name,
     rssi,
@@ -45,9 +52,11 @@ export {
   ACTION_BLESCAN_START,
   ACTION_BLESCAN_STOP,
   ACTION_BLESCAN_UPDATE,
+  ACTION_BLESCAN_CACHE,
   BleOnAction,
   BleOffAction,
   BleScanStartAction,
   BleScanStopAction,
   BleScanUpdateAction,
+  BleScanCacheAction,
 }
